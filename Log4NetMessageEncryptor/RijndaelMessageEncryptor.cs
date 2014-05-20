@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace ArtisanCode.Log4NetMessageEncryptor
 {
     public class RijndaelMessageEncryptor : IMessageEncryptor
     {
+        public const string CONFIGURATION_SECTION_NAME = "Log4NetMessageEncryptorConfigurationSection";
+
         /// <summary>
         /// Gets or sets the configuration.
         /// </summary>
@@ -23,7 +26,7 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// </remarks>
         public RijndaelMessageEncryptor()
         {
-            Configuration = ConfigurationManager.GetSection("Log4NetMessageEncryptorConfigurationSection") as Log4NetMessageEncryptorConfiguration;
+            Configuration = ConfigurationManager.GetSection(CONFIGURATION_SECTION_NAME) as Log4NetMessageEncryptorConfiguration;
         }
 
         /// <summary>
@@ -44,8 +47,35 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         {
             if (config == null)
             {
-                throw new ArgumentNullException("config");
+                throw new ArgumentNullException("config", "The encryption configuration is null. Have you forgotten to add it to the config section: " + CONFIGURATION_SECTION_NAME);
             }
+
+            if (string.IsNullOrWhiteSpace(config.EncryptionKey))
+            {
+                throw new CryptographicException("Encryption key is missing. Have you forgotten to add it to the config section: " + CONFIGURATION_SECTION_NAME);
+            }
+
+            if (!cryptoContainer.LegalKeySizes.Any(x => (x.MinSize <= config.KeySize) && (config.KeySize >= x.MaxSize)))
+            {
+                throw new CryptographicException("Invalid Key Size specified. The recommended value is: 256");
+            }
+
+            byte[] key = Convert.FromBase64String(config.EncryptionKey);
+
+            // Check that the key length is equal to config.KeySize / 8 
+            // e.g. 256/8 == 32 bytes expected for the key
+            if (key.Length != (config.KeySize / 8))
+            {
+                throw new CryptographicException("Encryption key is the wrong length. Please ensure that it is *EXACTLY* " + config.KeySize + " bits long");
+            }
+
+            cryptoContainer.Mode = config.CipherMode;
+            cryptoContainer.Padding = config.Padding;
+            cryptoContainer.KeySize = config.KeySize;
+            cryptoContainer.Key = key;
+
+            // Generate a new Unique IV for this container and transaction (can be overridden later to decrypt messages where the IV is known)
+            cryptoContainer.GenerateIV();
         }
 
         /// <summary>

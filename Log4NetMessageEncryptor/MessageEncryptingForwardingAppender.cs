@@ -24,8 +24,6 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// </value>
         public ILoggingEventFactory LogEventFactory { get; set; }
 
-        public Log4NetMessageEncryptorConfiguration EncryptionConfiguration { get; set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageEncryptingForwardingAppender"/> class.
         /// </summary>
