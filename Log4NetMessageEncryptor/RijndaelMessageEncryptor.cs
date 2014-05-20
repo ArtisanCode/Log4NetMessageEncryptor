@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace ArtisanCode.Log4NetMessageEncryptor
 {
-    public class MessageEncryptor : IMessageEncryptor
+    public class RijndaelMessageEncryptor : IMessageEncryptor
     {
         /// <summary>
         /// Gets or sets the configuration.
@@ -16,21 +16,21 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         public Log4NetMessageEncryptorConfiguration Configuration { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageEncryptor"/> class.
+        /// Initializes a new instance of the <see cref="RijndaelMessageEncryptor"/> class.
         /// </summary>
         /// <remarks>
         /// Reads the configuration directly from the configuration file section: Log4NetMessageEncryptorConfigurationSection
         /// </remarks>
-        public MessageEncryptor()
+        public RijndaelMessageEncryptor()
         {
             Configuration = ConfigurationManager.GetSection("Log4NetMessageEncryptorConfigurationSection") as Log4NetMessageEncryptorConfiguration;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MessageEncryptor"/> class.
+        /// Initializes a new instance of the <see cref="RijndaelMessageEncryptor"/> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
-        public MessageEncryptor(Log4NetMessageEncryptorConfiguration config)
+        public RijndaelMessageEncryptor(Log4NetMessageEncryptorConfiguration config)
         {
             Configuration = config;
         }

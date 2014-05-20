@@ -34,7 +34,7 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// </remarks>
         public MessageEncryptingForwardingAppender()
         {
-            MessageEncryption = new MessageEncryptor();
+            MessageEncryption = new RijndaelMessageEncryptor();
             LogEventFactory = new LoggingEventFactory();
         }
 

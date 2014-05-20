@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ArtisanCode.Test.Log4NetMessageEncryptor
 {
     [TestClass]
-    public class MessageEncryptorTests
+    public class RijndaelMessageEncryptorTests
     {
-        public MessageEncryptor _target;
+        public RijndaelMessageEncryptor _target;
 
         public Log4NetMessageEncryptorConfiguration testConfig;
 
@@ -15,7 +15,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
         {
             testConfig = new Log4NetMessageEncryptorConfiguration();
 
-            _target = new MessageEncryptor(testConfig);
+            _target = new RijndaelMessageEncryptor(testConfig);
         }
 
         [TestMethod]

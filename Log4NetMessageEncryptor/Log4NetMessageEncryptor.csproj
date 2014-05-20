@@ -53,7 +53,7 @@
     <Compile Include="LoggingEventFactory.cs" />
     <Compile Include="MessageDecryptor.cs" />
     <Compile Include="MessageEncryptingForwardingAppender.cs" />
-    <Compile Include="MessageEncryptor.cs" />
+    <Compile Include="RijndaelMessageEncryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
