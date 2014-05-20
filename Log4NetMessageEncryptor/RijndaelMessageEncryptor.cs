@@ -55,7 +55,7 @@ namespace ArtisanCode.Log4NetMessageEncryptor
                 throw new CryptographicException("Encryption key is missing. Have you forgotten to add it to the config section: " + CONFIGURATION_SECTION_NAME);
             }
 
-            if (!cryptoContainer.LegalKeySizes.Any(x => (x.MinSize <= config.KeySize) && (config.KeySize >= x.MaxSize)))
+            if (!cryptoContainer.LegalKeySizes.Any(x => (x.MinSize <= config.KeySize) && (config.KeySize <= x.MaxSize)))
             {
                 throw new CryptographicException("Invalid Key Size specified. The recommended value is: 256");
             }

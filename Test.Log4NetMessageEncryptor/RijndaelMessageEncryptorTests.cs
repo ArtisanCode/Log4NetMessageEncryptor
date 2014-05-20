@@ -78,5 +78,95 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             Assert.IsTrue(testContainer.IV.Length == 16);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConfigureCryptoContainer_NullConfiguration_ArgumentNullExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = null;
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CryptographicException))]
+        public void ConfigureCryptoContainer_NullEncryptionKey_CryptographicExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
+            {
+                EncryptionKey = null,
+            };
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CryptographicException))]
+        public void ConfigureCryptoContainer_EmptyEncryptionKey_CryptographicExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
+            {
+                EncryptionKey = string.Empty,
+            };
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CryptographicException))]
+        public void ConfigureCryptoContainer_WhitespaceEncryptionKey_CryptographicExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
+            {
+                EncryptionKey = "  \t",
+            };
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CryptographicException))]
+        public void ConfigureCryptoContainer_IllegalKeySizeTooSmall_CryptographicExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
+            {
+                EncryptionKey = "testKey",
+                KeySize = 127,
+            };
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CryptographicException))]
+        public void ConfigureCryptoContainer_IllegalKeySizeTooLarge_CryptographicExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
+            {
+                EncryptionKey = "testKey",
+                KeySize = 257,
+            };
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(CryptographicException))]
+        public void ConfigureCryptoContainer_InvalidKeyLength_CryptographicExceptionThrown()
+        {
+            var testContainer = new RijndaelManaged();
+            Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
+            {
+                EncryptionKey = Convert.ToBase64String(new byte[] { 0xDE, 0xAD, 0xBE, 0xEF }),
+                KeySize = 256,
+            };
+
+            _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
+        }
     }
 }
