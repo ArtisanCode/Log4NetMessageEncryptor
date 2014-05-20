@@ -10,13 +10,10 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
     [TestClass]
     public class MessageEncryptingForwardingAppenderTests
     {
-        MockRepository mocks;
-
-        MessageEncryptingForwardingAppender _target;
-
-        Mock<IMessageEncryptor> encryptorMock;
-
-        Mock<ILoggingEventFactory> logEventFactoryMock;
+        private MessageEncryptingForwardingAppender _target;
+        private Mock<IMessageEncryptor> encryptorMock;
+        private Mock<ILoggingEventFactory> logEventFactoryMock;
+        private MockRepository mocks;
 
         [TestInitialize]
         public void __init()
@@ -30,7 +27,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
         }
 
         [TestMethod]
-        public void GenerateEncryptedLogEvent_TestOrchestrationGreenPath_MessageEncrypted()
+        public void ActionAppendSingle_TestOrchestrationGreenPath_BaseCalled()
         {
             // arrange
             var testEventData = Builder<LoggingEventData>.CreateNew().Build();
@@ -41,11 +38,10 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             logEventFactoryMock.Setup(x => x.CreateEncryptedLoggingEvent(testEvent, testEncryptedString)).Returns(testEvent);
 
             // act
-            var result = _target.GenerateEncryptedLogEvent(testEvent);
+            _target.ActionAppend(testEvent);
 
             // assert
             mocks.VerifyAll();
-            Assert.AreSame(testEvent, result);
         }
 
         [TestMethod]
@@ -69,7 +65,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
         }
 
         [TestMethod]
-        public void ActionAppendSingle_TestOrchestrationGreenPath_BaseCalled()
+        public void GenerateEncryptedLogEvent_TestOrchestrationGreenPath_MessageEncrypted()
         {
             // arrange
             var testEventData = Builder<LoggingEventData>.CreateNew().Build();
@@ -80,10 +76,11 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             logEventFactoryMock.Setup(x => x.CreateEncryptedLoggingEvent(testEvent, testEncryptedString)).Returns(testEvent);
 
             // act
-            _target.ActionAppend(testEvent);
+            var result = _target.GenerateEncryptedLogEvent(testEvent);
 
             // assert
             mocks.VerifyAll();
+            Assert.AreSame(testEvent, result);
         }
     }
 }

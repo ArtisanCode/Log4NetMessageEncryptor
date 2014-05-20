@@ -1,5 +1,4 @@
-﻿
-using log4net.Appender;
+﻿using log4net.Appender;
 using log4net.Core;
 using System;
 using System.Linq;
@@ -8,22 +7,6 @@ namespace ArtisanCode.Log4NetMessageEncryptor
 {
     public class MessageEncryptingForwardingAppender : ForwardingAppender
     {
-        /// <summary>
-        /// Gets or sets the message encryption engine.
-        /// </summary>
-        /// <value>
-        /// The message encryption engine.
-        /// </value>
-        public IMessageEncryptor MessageEncryption { get; set; }
-
-        /// <summary>
-        /// Gets or sets the log event factory.
-        /// </summary>
-        /// <value>
-        /// The log event factory.
-        /// </value>
-        public ILoggingEventFactory LogEventFactory { get; set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageEncryptingForwardingAppender"/> class.
         /// </summary>
@@ -50,6 +33,44 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         }
 
         /// <summary>
+        /// Gets or sets the log event factory.
+        /// </summary>
+        /// <value>
+        /// The log event factory.
+        /// </value>
+        public ILoggingEventFactory LogEventFactory { get; set; }
+
+        /// <summary>
+        /// Gets or sets the message encryption engine.
+        /// </summary>
+        /// <value>
+        /// The message encryption engine.
+        /// </value>
+        public IMessageEncryptor MessageEncryption { get; set; }
+
+        /// <summary>
+        /// Actions the append.
+        /// </summary>
+        /// <param name="loggingEvent">The logging event.</param>
+        public void ActionAppend(LoggingEvent loggingEvent)
+        {
+            var eventWithEncryptedMessage = GenerateEncryptedLogEvent(loggingEvent);
+
+            base.Append(eventWithEncryptedMessage);
+        }
+
+        /// <summary>
+        /// Actions the append.
+        /// </summary>
+        /// <param name="loggingEvents">The logging events.</param>
+        public void ActionAppend(LoggingEvent[] loggingEvents)
+        {
+            var encryptedEvents = loggingEvents.Select(x => GenerateEncryptedLogEvent(x)).ToArray();
+
+            base.Append(loggingEvents);
+        }
+
+        /// <summary>
         /// Generates the encrypted log event.
         /// </summary>
         /// <param name="source">The source logging event.</param>
@@ -73,28 +94,6 @@ namespace ArtisanCode.Log4NetMessageEncryptor
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Actions the append.
-        /// </summary>
-        /// <param name="loggingEvent">The logging event.</param>
-        public void ActionAppend(LoggingEvent loggingEvent)
-        {
-            var eventWithEncryptedMessage = GenerateEncryptedLogEvent(loggingEvent);
-
-            base.Append(eventWithEncryptedMessage);
-        }
-
-        /// <summary>
-        /// Actions the append.
-        /// </summary>
-        /// <param name="loggingEvents">The logging events.</param>
-        public void ActionAppend(LoggingEvent[] loggingEvents)
-        {
-            var encryptedEvents = loggingEvents.Select(x => GenerateEncryptedLogEvent(x)).ToArray();
-
-            base.Append(loggingEvents);
         }
 
         /// <summary>

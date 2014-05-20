@@ -1,11 +1,31 @@
-﻿
-using log4net.Core;
+﻿using log4net.Core;
 using System;
 using System.Threading;
+
 namespace ArtisanCode.Log4NetMessageEncryptor
 {
     public class LoggingEventFactory : ILoggingEventFactory
     {
+        /// <summary>
+        /// Creates the encrypted logging event.
+        /// </summary>
+        /// <param name="source">The source logging event to use.</param>
+        /// <param name="encryptedLoggingMessage">The encrypted logging message to set within the LoggingEvent.</param>
+        /// <returns>A cloned instance of LoggingEvent with the message property set to the encryptedLoggingMessage</returns>
+        /// <exception cref="System.ArgumentNullException">source</exception>
+        public LoggingEvent CreateEncryptedLoggingEvent(LoggingEvent source, string encryptedLoggingMessage)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+
+            var sourceEventData = source.GetLoggingEventData();
+            sourceEventData.Message = encryptedLoggingMessage;
+
+            return new LoggingEvent(sourceEventData);
+        }
+
         /// <summary>
         /// Creates the error event to forward to other appenders indicating an error with this component.
         /// </summary>
@@ -28,26 +48,6 @@ namespace ArtisanCode.Log4NetMessageEncryptor
             };
 
             return new LoggingEvent(data);
-        }
-
-        /// <summary>
-        /// Creates the encrypted logging event.
-        /// </summary>
-        /// <param name="source">The source logging event to use.</param>
-        /// <param name="encryptedLoggingMessage">The encrypted logging message to set within the LoggingEvent.</param>
-        /// <returns>A cloned instance of LoggingEvent with the message property set to the encryptedLoggingMessage</returns>
-        /// <exception cref="System.ArgumentNullException">source</exception>
-        public LoggingEvent CreateEncryptedLoggingEvent(LoggingEvent source, string encryptedLoggingMessage)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
-
-            var sourceEventData = source.GetLoggingEventData();
-            sourceEventData.Message = encryptedLoggingMessage;
-
-            return new LoggingEvent(sourceEventData);
         }
     }
 }

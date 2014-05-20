@@ -5,6 +5,24 @@ namespace ArtisanCode.Log4NetMessageEncryptor
 {
     public class Log4NetMessageEncryptorConfiguration : ConfigurationSection
     {
+        /// <summary>
+        /// Gets or sets the cipher mode.
+        /// </summary>
+        /// <value>
+        /// The cipher mode.
+        /// </value>
+        [ConfigurationProperty("cipherMode", IsRequired = false, DefaultValue = CipherMode.CBC)]
+        public CipherMode CipherMode
+        {
+            get
+            {
+                return (CipherMode)this["cipherMode"];
+            }
+            set
+            {
+                this["cipherMode"] = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the encryption key.
@@ -65,25 +83,5 @@ namespace ArtisanCode.Log4NetMessageEncryptor
                 this["padding"] = value;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the cipher mode.
-        /// </summary>
-        /// <value>
-        /// The cipher mode.
-        /// </value>
-        [ConfigurationProperty("cipherMode", IsRequired = false, DefaultValue = CipherMode.CBC)]
-        public CipherMode CipherMode
-        {
-            get
-            {
-                return (CipherMode)this["cipherMode"];
-            }
-            set
-            {
-                this["cipherMode"] = value;
-            }
-        }
-
     }
 }

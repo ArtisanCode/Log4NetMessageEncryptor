@@ -1,5 +1,4 @@
-﻿
-namespace ArtisanCode.Log4NetMessageEncryptor
+﻿namespace ArtisanCode.Log4NetMessageEncryptor
 {
     public interface IMessageDecryptor
     {
