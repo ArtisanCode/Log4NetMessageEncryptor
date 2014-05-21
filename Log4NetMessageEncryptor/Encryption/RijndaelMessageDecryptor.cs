@@ -1,40 +1,49 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace ArtisanCode.Log4NetMessageEncryptor.Encryption
 {
     public class RijndaelMessageDecryptor : RijndaelMessageHandler, IMessageDecryptor
     {
-        public RijndaelMessageDecryptor(): base()
+        public RijndaelMessageDecryptor()
+            : base()
         {
 
         }
 
-        public RijndaelMessageDecryptor(Log4NetMessageEncryptorConfiguration config): base(config)
+        public RijndaelMessageDecryptor(Log4NetMessageEncryptorConfiguration config)
+            : base(config)
         {
 
         }
 
-        public virtual string Decrypt(string source)
+        /// <summary>
+        /// Decrypts the specified cypherText.
+        /// </summary>
+        /// <param name="cypherText">The cypherText to decrypt.</param>
+        /// <returns>The plaintext decrypted version of the cypher text</returns>
+        /// <exception cref="System.ArgumentException">Invalid source string. Unable to determine the correct IV used for the encryption. Please ensure the source string is in the format 'Cypher Text' + CYPHER_TEXT_IV_SEPERATOR + 'IV';source</exception>
+        public virtual string Decrypt(string cypherText)
         {
             // Short-circuit decryption for empty strings
-            if (string.IsNullOrEmpty(source))
+            if (string.IsNullOrEmpty(cypherText))
             {
                 return string.Empty;
             }
 
-            var primatives = source.Split(new[] { CYPHER_TEXT_IV_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
+            var primatives = cypherText.Split(new[] { CYPHER_TEXT_IV_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
 
             if (primatives.Length != 2)
             {
-                throw new ArgumentException("Invalid source string. Unable to determine the correct IV used for the encryption. Please ensure the source string is in the format 'Cypher Text'" + CYPHER_TEXT_IV_SEPERATOR + "'IV'", "source");
+                throw new ArgumentException("Invalid cypherText. Unable to determine the correct IV used for the encryption. Please ensure the source string is in the format 'Cypher Text'" + CYPHER_TEXT_IV_SEPERATOR + "'IV'", "source");
             }
 
-            var cypherText = Convert.FromBase64String(primatives[0]);
+            var cypherTextPrimitave = Convert.FromBase64String(primatives[0]);
             var iv = Convert.FromBase64String(primatives[1]);
 
-            return DecryptStringFromBytes(cypherText, iv);
+            return DecryptStringFromBytes(cypherTextPrimitave, iv);
         }
 
 
@@ -99,6 +108,64 @@ namespace ArtisanCode.Log4NetMessageEncryptor.Encryption
             }
 
             return plaintext;
+        }
+
+
+        /// <summary>
+        /// Decrypts a log message.
+        /// </summary>
+        /// <param name="logMessage">The log message to decrypt.</param>
+        /// <returns>
+        /// The log message with the encrypted strings replaced with the plaintext equivalent
+        /// </returns>
+        public virtual string DecyptMessage(string logMessage)
+        {
+            if (string.IsNullOrWhiteSpace(logMessage))
+            {
+                return logMessage;
+            }
+
+            // Determine if the log message has multiple lines e.g. is an Exception message
+            var logLines = logMessage.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (logLines.Length > 1)
+            {
+                // Decrypt each line individually and join them together in the same order they appeared
+                return string.Join(Environment.NewLine, logLines.Select(x => DecryptLogLine(x)));
+            }
+
+            return DecryptLogLine(logLines.First());
+        }
+
+        /// <summary>
+        /// Decrypts the log line.
+        /// </summary>
+        /// <param name="logLine">The log line.</param>
+        /// <returns>the plaintext representation of the log line</returns>
+        public virtual string DecryptLogLine(string logLine)
+        {
+            // Assume that the message is split by spaces
+            var tokens = logLine.Split(new[] { ' ' }, StringSplitOptions.None);
+
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                // Only attempt to decrypt log messages that contain the cypher / IV separator (>>)
+                if (tokens[i].Contains(CYPHER_TEXT_IV_SEPERATOR))
+                {
+                    // If the decryption succeeds, replace the encrypted string with the decrypted message
+                    try
+                    {
+                        var decryptedMessage = Decrypt(tokens[i]);
+                        logLine = logLine.Replace(tokens[i], decryptedMessage);
+                    }
+                    catch
+                    {
+                        // Do nothing: If the decryption fails, leave the encrypted string in place
+                    }
+                }
+            }
+
+            return logLine;
         }
     }
 }
