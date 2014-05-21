@@ -11,9 +11,10 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// </summary>
         /// <param name="source">The source logging event to use.</param>
         /// <param name="encryptedLoggingMessage">The encrypted logging message to set within the LoggingEvent.</param>
+        /// <param name="encryptedExceptionMessage">The encrypted exception message to set (if at all) within the LoggingEvent.</param>
         /// <returns>A cloned instance of LoggingEvent with the message property set to the encryptedLoggingMessage</returns>
         /// <exception cref="System.ArgumentNullException">source</exception>
-        public LoggingEvent CreateEncryptedLoggingEvent(LoggingEvent source, string encryptedLoggingMessage)
+        public LoggingEvent CreateEncryptedLoggingEvent(LoggingEvent source, string encryptedLoggingMessage, string encryptedExceptionMessage = null)
         {
             if (source == null)
             {
@@ -22,6 +23,11 @@ namespace ArtisanCode.Log4NetMessageEncryptor
 
             var sourceEventData = source.GetLoggingEventData();
             sourceEventData.Message = encryptedLoggingMessage;
+
+            if (!string.IsNullOrWhiteSpace(encryptedExceptionMessage))
+            {
+                sourceEventData.ExceptionString = encryptedExceptionMessage;
+            }
 
             return new LoggingEvent(sourceEventData);
         }

@@ -1,4 +1,6 @@
-﻿using log4net.Appender;
+﻿using ArtisanCode.Log4NetMessageEncryptor.Encryption;
+
+using log4net.Appender;
 using log4net.Core;
 using System;
 using System.Linq;
@@ -83,7 +85,15 @@ namespace ArtisanCode.Log4NetMessageEncryptor
             {
                 var encryptedMessage = MessageEncryption.Encrypt(source.RenderedMessage);
 
-                result = LogEventFactory.CreateEncryptedLoggingEvent(source, encryptedMessage);
+                string exceptionString = source.GetExceptionString();
+                string encryptedExceptionMessage = null;
+
+                if(!string.IsNullOrWhiteSpace(exceptionString))
+                {
+                    encryptedExceptionMessage = MessageEncryption.Encrypt(exceptionString);
+                }
+
+                result = LogEventFactory.CreateEncryptedLoggingEvent(source, encryptedMessage, encryptedExceptionMessage);
             }
             catch (Exception ex)
             {

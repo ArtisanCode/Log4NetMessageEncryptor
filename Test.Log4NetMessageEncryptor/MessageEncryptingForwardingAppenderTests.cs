@@ -1,4 +1,6 @@
 ﻿using ArtisanCode.Log4NetMessageEncryptor;
+using ArtisanCode.Log4NetMessageEncryptor.Encryption;
+
 using FizzWare.NBuilder;
 using log4net.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,7 +37,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             string testEncryptedString = "QQQQQQQQQ";
 
             encryptorMock.Setup(x => x.Encrypt(testEvent.RenderedMessage)).Returns(testEncryptedString);
-            logEventFactoryMock.Setup(x => x.CreateEncryptedLoggingEvent(testEvent, testEncryptedString)).Returns(testEvent);
+            logEventFactoryMock.Setup(x => x.CreateEncryptedLoggingEvent(testEvent, testEncryptedString, null)).Returns(testEvent);
 
             // act
             _target.ActionAppend(testEvent);
@@ -73,7 +75,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             string testEncryptedString = "QQQQQQQQQ";
 
             encryptorMock.Setup(x => x.Encrypt(testEvent.RenderedMessage)).Returns(testEncryptedString);
-            logEventFactoryMock.Setup(x => x.CreateEncryptedLoggingEvent(testEvent, testEncryptedString)).Returns(testEvent);
+            logEventFactoryMock.Setup(x => x.CreateEncryptedLoggingEvent(testEvent, testEncryptedString, null)).Returns(testEvent);
 
             // act
             var result = _target.GenerateEncryptedLogEvent(testEvent);

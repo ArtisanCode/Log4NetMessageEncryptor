@@ -5,63 +5,42 @@ namespace ArtisanCode.Log4NetMessageEncryptor
 {
     public class Log4NetMessageEncryptorConfiguration : ConfigurationSection
     {
+        
         /// <summary>
         /// Gets or sets the cipher mode.
         /// </summary>
         /// <value>
         /// The cipher mode.
         /// </value>
-        [ConfigurationProperty("cipherMode", IsRequired = false, DefaultValue = CipherMode.CBC)]
+        [ConfigurationProperty("EncryptionKey", IsRequired = true)]
+        public EncryptionKeyConfigurationElement EncryptionKey
+        {
+            get
+            {
+                return (EncryptionKeyConfigurationElement)this["EncryptionKey"];
+            }
+            set
+            {
+                this["EncryptionKey"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the cipher mode.
+        /// </summary>
+        /// <value>
+        /// The cipher mode.
+        /// </value>
+        [ConfigurationProperty("CipherMode", IsRequired = false, DefaultValue = CipherMode.CBC)]
         public CipherMode CipherMode
         {
             get
             {
-                return (CipherMode)this["cipherMode"];
+                return (CipherMode)this["CipherMode"];
             }
             set
             {
-                this["cipherMode"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the encryption key.
-        /// </summary>
-        /// <remarks>
-        /// The length of the key needs to be the same as the value defined within the keySize configuration
-        /// </remarks>
-        /// <value>
-        /// The encryption key.
-        /// </value>
-        [ConfigurationProperty("encryptionKey", IsRequired = true)]
-        public string EncryptionKey
-        {
-            get
-            {
-                return (string)this["encryptionKey"];
-            }
-            set
-            {
-                this["encryptionKey"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the size of the key in bits.
-        /// </summary>
-        /// <value>
-        /// The size of the key in bits.
-        /// </value>
-        [ConfigurationProperty("keySize", IsRequired = true, DefaultValue = 256)]
-        public int KeySize
-        {
-            get
-            {
-                return (int)this["keySize"];
-            }
-            set
-            {
-                this["keySize"] = value;
+                this["CipherMode"] = value;
             }
         }
 
@@ -71,16 +50,16 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// <value>
         /// The padding mode.
         /// </value>
-        [ConfigurationProperty("padding", IsRequired = false, DefaultValue = PaddingMode.ISO10126)]
+        [ConfigurationProperty("Padding", IsRequired = false, DefaultValue = PaddingMode.ISO10126)]
         public PaddingMode Padding
         {
             get
             {
-                return (PaddingMode)this["padding"];
+                return (PaddingMode)this["Padding"];
             }
             set
             {
-                this["padding"] = value;
+                this["Padding"] = value;
             }
         }
     }

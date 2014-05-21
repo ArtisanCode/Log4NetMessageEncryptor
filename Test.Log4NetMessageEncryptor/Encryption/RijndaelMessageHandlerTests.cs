@@ -1,15 +1,18 @@
-﻿using ArtisanCode.Log4NetMessageEncryptor;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace ArtisanCode.Test.Log4NetMessageEncryptor
+using ArtisanCode.Log4NetMessageEncryptor;
+using ArtisanCode.Log4NetMessageEncryptor.Encryption;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ArtisanCode.Test.Log4NetMessageEncryptor.Encryption
 {
     [TestClass]
-    public class RijndaelMessageEncryptorTests
+    public class RijndaelMessageHandlerTests
     {
-        public RijndaelMessageEncryptor _target;
+        public RijndaelMessageHandlerTestHarness _target;
 
         public Log4NetMessageEncryptorConfiguration testConfig;
 
@@ -18,8 +21,9 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
         {
             testConfig = new Log4NetMessageEncryptorConfiguration();
 
-            _target = new RijndaelMessageEncryptor(testConfig);
+            _target = new RijndaelMessageHandlerTestHarness(testConfig);
         }
+
 
         [TestMethod]
         [ExpectedException(typeof(CryptographicException))]
@@ -28,7 +32,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             var testContainer = new RijndaelManaged();
             Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
             {
-                EncryptionKey = string.Empty,
+                EncryptionKey = new EncryptionKeyConfigurationElement(256, string.Empty),
             };
 
             _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
@@ -41,8 +45,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             var testContainer = new RijndaelManaged();
             Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
             {
-                EncryptionKey = "testKey",
-                KeySize = 257,
+                EncryptionKey = new EncryptionKeyConfigurationElement(257, "testKey"),
             };
 
             _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
@@ -55,8 +58,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             var testContainer = new RijndaelManaged();
             Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
             {
-                EncryptionKey = "testKey",
-                KeySize = 127,
+                EncryptionKey = new EncryptionKeyConfigurationElement(127, "testKey"),
             };
 
             _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
@@ -69,8 +71,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             var testContainer = new RijndaelManaged();
             Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
             {
-                EncryptionKey = Convert.ToBase64String(new byte[] { 0xDE, 0xAD, 0xBE, 0xEF }),
-                KeySize = 256,
+                EncryptionKey = new EncryptionKeyConfigurationElement(255, Convert.ToBase64String(new byte[] { 0xDE, 0xAD, 0xBE, 0xEF })),
             };
 
             _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
@@ -87,7 +88,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
         }
 
         [TestMethod]
-        [ExpectedException(typeof(CryptographicException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void ConfigureCryptoContainer_NullEncryptionKey_CryptographicExceptionThrown()
         {
             var testContainer = new RijndaelManaged();
@@ -111,9 +112,8 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             };
             var validTestConfig = new Log4NetMessageEncryptorConfiguration()
             {
+                EncryptionKey = new EncryptionKeyConfigurationElement(256, Convert.ToBase64String(testKey)),
                 CipherMode = CipherMode.CBC,
-                EncryptionKey = Convert.ToBase64String(testKey),
-                KeySize = 256,
                 Padding = PaddingMode.ISO10126
             };
 
@@ -122,7 +122,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             Assert.IsTrue(testKey.SequenceEqual(testContainer.Key));
             Assert.AreEqual(validTestConfig.CipherMode, testContainer.Mode);
             Assert.AreEqual(validTestConfig.Padding, testContainer.Padding);
-            Assert.AreEqual(validTestConfig.KeySize, testContainer.KeySize);
+            Assert.AreEqual(validTestConfig.EncryptionKey.KeySize, testContainer.KeySize);
             Assert.IsTrue(testContainer.IV.Length == 16);
         }
 
@@ -133,40 +133,20 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             var testContainer = new RijndaelManaged();
             Log4NetMessageEncryptorConfiguration invalidTestConfig = new Log4NetMessageEncryptorConfiguration
             {
-                EncryptionKey = "  \t",
+                EncryptionKey = new EncryptionKeyConfigurationElement(256, "  \t"),
             };
 
             _target.ConfigureCryptoContainer(testContainer, invalidTestConfig);
         }
 
-        [TestMethod]
-        public void Encrypt_EmptyPlaintext_EmptyStringReturned()
+    }
+
+    public class RijndaelMessageHandlerTestHarness : RijndaelMessageHandler
+    {
+        public RijndaelMessageHandlerTestHarness(Log4NetMessageEncryptorConfiguration config)
+            : base(config)
         {
-            var result = _target.Encrypt("");
 
-            Assert.AreEqual(string.Empty, result);
-        }
-
-        [TestMethod]
-        public void Encrypt_MessageEncryptedSucessfully_NoExceptionsRaised()
-        {
-            var result = _target.Encrypt("my very secret string");
-        }
-
-        [TestMethod]
-        public void Encrypt_NullPlaintext_EmptyStringReturned()
-        {
-            var result = _target.Encrypt(null);
-
-            Assert.AreEqual(string.Empty, result);
-        }
-
-        [TestMethod]
-        public void Encrypt_WhitespacePlaintext_PlaintextEncrypted()
-        {
-            var result = _target.Encrypt("  \t");
-
-            Assert.AreNotEqual(string.Empty, result);
         }
     }
 }
