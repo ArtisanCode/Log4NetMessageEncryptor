@@ -4,6 +4,7 @@ using ArtisanCode.Log4NetMessageEncryptor;
 using ArtisanCode.Log4NetMessageEncryptor.Encryption;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ArtisanCode.Test.Log4NetMessageEncryptor.Encryption
 {
@@ -23,6 +24,26 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor.Encryption
             _target = new RijndaelMessageDecryptor(testConfig);
         }
 
+        [TestMethod]
+        public void ConstructorWithConfig_ConfigStoredInCorrectProperty_ConfigCanBeAccessed()
+        {
+            var localTestConfig = new Log4NetMessageEncryptorConfiguration();
+            localTestConfig.EncryptionKey = new EncryptionKeyConfigurationElement(256, "3q2+796tvu/erb7v3q2+796tvu/erb7v3q2+796tvu8=");
+
+            var target = new RijndaelMessageDecryptor(localTestConfig);
+
+            Assert.AreSame(localTestConfig, target.Configuration);
+        }
+
+
+        [TestMethod]
+        public void ParameterlessConstructor_ConfigRetrievedFromConfigFile_ConfigCanBeAccessed()
+        {
+            var target = new RijndaelMessageDecryptor();
+
+            Assert.IsNotNull(target.Configuration);
+            Assert.AreEqual("TestKey", target.Configuration.EncryptionKey.Key); // NB: retrieved from the App.config file
+        }
 
         [TestMethod]
         public void Decrypt_EmptyPlaintext_EmptyStringReturned()
@@ -58,6 +79,55 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor.Encryption
         public void Decrypt_InvalidLengthTextSentForDecryption_ExceptionThrown()
         {
             var result = _target.Decrypt("dGVzdCBkYXRh>>wLQO0465tJ5lxuodSSlmgg==");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Decrypt_InvalidSourceMissingCypherText_ExceptionThrown()
+        {
+            var result = _target.Decrypt(">>wLQO0465tJ5lxuodSSlmgg==");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Decrypt_InvalidSourceMissingSeperator_ExceptionThrown()
+        {
+            var result = _target.Decrypt("dGVzdCBkYXRhwLQO0465tJ5lxuodSSlmgg====");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Decrypt_InvalidSourceMissingIV_ExceptionThrown()
+        {
+            var result = _target.Decrypt("dGVzdCBkYXRh>>");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DecryptStringFromBytes_EmptyCypherText_ExceptionThrown()
+        {
+            var result = _target.DecryptStringFromBytes(new byte[0], new byte[]{0x0,0x5});
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DecryptStringFromBytes_NullCypherText_ExceptionThrown()
+        {
+            var result = _target.DecryptStringFromBytes(null, new byte[] { 0x0, 0x5 });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DecryptStringFromBytes_EmptyIV_ExceptionThrown()
+        {
+            var result = _target.DecryptStringFromBytes(new byte[] { 0x0, 0x5 }, new byte[0]);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DecryptStringFromBytes_NullIV_ExceptionThrown()
+        {
+            var result = _target.DecryptStringFromBytes(new byte[] { 0x0, 0x5 }, null);
         }
     }
 }

@@ -21,6 +21,26 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor.Encryption
             _target = new RijndaelMessageEncryptor(testConfig);
         }
 
+        [TestMethod]
+        public void ConstructorWithConfig_ConfigStoredInCorrectProperty_ConfigCanBeAccessed()
+        {
+            var localTestConfig = new Log4NetMessageEncryptorConfiguration();
+            localTestConfig.EncryptionKey = new EncryptionKeyConfigurationElement(256, "3q2+796tvu/erb7v3q2+796tvu/erb7v3q2+796tvu8=");
+
+            var target = new RijndaelMessageEncryptor(localTestConfig);
+
+            Assert.AreSame(localTestConfig, target.Configuration);
+        }
+
+
+        [TestMethod]
+        public void ParameterlessConstructor_ConfigRetrievedFromConfigFile_ConfigCanBeAccessed()
+        {
+            var target = new RijndaelMessageEncryptor();
+
+            Assert.IsNotNull(target.Configuration);
+            Assert.AreEqual("TestKey", target.Configuration.EncryptionKey.Key); // NB: retrieved from the App.config file
+        }
 
         [TestMethod]
         public void Encrypt_EmptyPlaintext_EmptyStringReturned()

@@ -52,8 +52,6 @@ namespace ArtisanCode.Log4NetMessageEncryptor.Encryption
         /// <exception cref="System.ArgumentNullException">
         /// cipherText
         /// or
-        /// Key
-        /// or
         /// IV
         /// </exception>
         public virtual string DecryptStringFromBytes(byte[] cipherText, byte[] IV)
