@@ -39,14 +39,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FizzWare.NBuilder">
-      <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
+      <HintPath>..\..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.3\lib\net35-full\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+      <HintPath>..\..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -70,6 +70,7 @@
     <Compile Include="Encryption\RijndaelMessageDecryptorTests.cs" />
     <Compile Include="Encryption\RijndaelMessageEncryptorTests.cs" />
     <Compile Include="Encryption\RijndaelMessageHandlerTests.cs" />
+    <Compile Include="LoggingEventFactoryTests.cs" />
     <Compile Include="MessageEncryptingForwardingAppenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -78,7 +79,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Log4NetMessageEncryptor\Log4NetMessageEncryptor.csproj">
+    <ProjectReference Include="..\..\src\Log4NetMessageEncryptor\Log4NetMessageEncryptor.csproj">
       <Project>{fc66dd47-93d4-4191-ac8f-454ba3616fb6}</Project>
       <Name>Log4NetMessageEncryptor</Name>
     </ProjectReference>

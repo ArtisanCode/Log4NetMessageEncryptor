@@ -122,7 +122,7 @@ namespace ArtisanCode.Log4NetMessageEncryptor.Encryption
         {
             if (string.IsNullOrWhiteSpace(logMessage))
             {
-                return logMessage;
+                return string.Empty;
             }
 
             // Determine if the log message has multiple lines e.g. is an Exception message

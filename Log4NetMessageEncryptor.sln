@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetMessageEncryptor", "Log4NetMessageEncryptor\Log4NetMessageEncryptor.csproj", "{FC66DD47-93D4-4191-AC8F-454BA3616FB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetMessageEncryptor", "src\Log4NetMessageEncryptor\Log4NetMessageEncryptor.csproj", "{FC66DD47-93D4-4191-AC8F-454BA3616FB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E1F048B6-9E88-4186-B28F-093DFFC96CA4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1F55C7C1-0EAD-4EBF-96C6-CB7C153DFF33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Log4NetMessageEncryptor", "Test.Log4NetMessageEncryptor\Test.Log4NetMessageEncryptor.csproj", "{28554DB7-5C83-4B1B-95FD-F24786AAA47B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Log4NetMessageEncryptor", "test\Test.Log4NetMessageEncryptor\Test.Log4NetMessageEncryptor.csproj", "{28554DB7-5C83-4B1B-95FD-F24786AAA47B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{44C21A8E-2815-40FD-B76F-155CDEDED3C3}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{44C21A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{AD97421E-08F1-4777-BD53-045B197650FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageEncryptorExample", "MessageEncryptorExample\MessageEncryptorExample.csproj", "{80AABFB1-EB9D-43B6-9F16-51F7D0ABAA04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageEncryptorExample", "sample\MessageEncryptorExample\MessageEncryptorExample.csproj", "{80AABFB1-EB9D-43B6-9F16-51F7D0ABAA04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

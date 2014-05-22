@@ -153,6 +153,22 @@ iGYN8z6B06FIxZwYkJ5NgbAow9wxLH0nh/CITvmi3s4j6KKWl7mkrSI11lkgy+aQbtUEDDYL4OzLKAZv
         }
 
         [TestMethod]
+        public void DecryptMessage_EmptyLogMessageString_EmptyStringReturned()
+        {
+            string result = _target.DecyptMessage(string.Empty);
+
+            Assert.AreEqual(string.Empty, result);
+        }
+
+        [TestMethod]
+        public void DecryptMessage_NullLogMessageString_EmptyStringReturned()
+        {
+            string result = _target.DecyptMessage(null);
+
+            Assert.AreEqual(string.Empty, result);
+        }
+
+        [TestMethod]
         public void DecryptMessage_InputStringWithMultipleSeperatorCharacters_CorrectResultReturned()
         {
 
