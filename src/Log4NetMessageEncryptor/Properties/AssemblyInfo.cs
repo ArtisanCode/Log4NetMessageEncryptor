@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Log4NetMessageEncryptor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Encrypts Log4Net log messages using a symmetric key algorithm whilst leaving the rest of the log message (timestamp, level etc.) in plaintext.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("ArtisanCode")]
 [assembly: AssemblyProduct("Log4NetMessageEncryptor")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © ArtisanCode 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

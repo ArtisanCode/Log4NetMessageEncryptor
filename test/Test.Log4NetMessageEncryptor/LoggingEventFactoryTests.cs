@@ -3,9 +3,6 @@ using FizzWare.NBuilder;
 using log4net.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ArtisanCode.Test.Log4NetMessageEncryptor
 {
@@ -42,13 +39,28 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             Assert.AreEqual(testEventData.Level, result.Level);
             Assert.AreEqual(testEventData.LoggerName, result.LoggerName);
             Assert.AreEqual(testEventData.TimeStamp, result.TimeStamp);
+        }
 
-            // TODO: make the factory preserve the environment details
-            //Assert.AreEqual(testEventData.Domain, result.Domain);
-            //Assert.AreEqual(testEventData.Identity, result.Identity);
-            //Assert.AreEqual(testEventData.LocationInfo, result.LocationInformation);
-            //Assert.AreEqual(testEventData.ThreadName, result.ThreadName);
-            //Assert.AreEqual(testEventData.UserName, result.UserName);
+        [TestMethod]
+        public void CreateErrorEvent_ValidErrorMessage_MessageCreated()
+        {
+            var msg = "Test error message";
+
+            var result = _target.CreateErrorEvent(msg);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(msg, result.GetExceptionString());
+        }
+
+        [TestMethod]
+        public void CreateErrorEvent_EmptyErrorMessage_MessageCreated()
+        {
+            var msg = string.Empty;
+
+            var result = _target.CreateErrorEvent(msg);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(msg, result.GetExceptionString());
         }
     }
 }
