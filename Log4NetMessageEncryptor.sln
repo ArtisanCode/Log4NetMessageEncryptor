@@ -25,7 +25,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7AAFF8D9-2AE2-4174-A7C2-339ABB233D4B}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
-		Log4Net.MessageEncryptor.nuspec = Log4Net.MessageEncryptor.nuspec
 		README.md = README.md
 	EndProjectSection
 EndProject

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <iconUrl>https://avatars3.githubusercontent.com/u/7647107</iconUrl>
+    <licenseUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Encrypts Log4Net log messages using a symmetric key algorithm whilst leaving the rest of the log message (timestamp, level etc.) in plaintext.</description>
+    <releaseNotes>Initial version</releaseNotes>
+    <tags>.NET Log4Net logging</tags>
+  </metadata>
+</package>
