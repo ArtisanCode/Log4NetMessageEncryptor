@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>Log4Net.MessageEncryptor</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>Log4Net Message Encryption</title>
+    <authors>Tom Kuhn</authors>
+    <owners>Artisan Code</owners>
     <iconUrl>https://avatars3.githubusercontent.com/u/7647107</iconUrl>
     <licenseUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor</projectUrl>
