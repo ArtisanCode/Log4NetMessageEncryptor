@@ -10,8 +10,8 @@
     <licenseUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Encrypts Log4Net log messages using a symmetric key algorithm whilst leaving the rest of the log message (timestamp, level etc.) in plaintext.</description>
+    <description>The Log4Net MessageEncryptor tool lets you encrypt log messages whilst keeping the log meta data (timestamp, level etc.) in plaintext. The encryption used is a standard symmetric key encryption algorithm (Rijndael) to securely lock away any sensitive information present within the log messages.</description>
     <releaseNotes>Initial version</releaseNotes>
-    <tags>.NET Log4Net logging</tags>
+    <tags>.NET Log4Net logging Encryption</tags>
   </metadata>
 </package>
