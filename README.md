@@ -44,7 +44,8 @@ This is the heart of the tool, this tells the encryption algorithm everything it
 **Important**
 
 - The recommended KeySize value is 256 (the maximum permitted). This represents the length in bits of the encryption key. The encryption key must be _exactly_ this length.
-- Please **do not use this example key ... EVER**!! Please ensure that you generate a new encryption key in a safe and secure manner. This key was generated using the following code:
+- Please **do not use this example key ... EVER**!! Please ensure that you generate a new encryption key in a safe and secure manner. You can find a helper program within the sample folder called KeyGen that is able to create a new symmetric key for the MessageEncryptor. 
+The sample key was generated using the following code:
 ```cs
 Convert.ToBase64String(new byte[32] {
                 0xDE, 0xAD, 0xBE, 0xEF, 0xDE, 0xAD, 0xBE, 0xEF,
