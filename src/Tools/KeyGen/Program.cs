@@ -1,10 +1,9 @@
-﻿using ArtisanCode.Log4NetMessageEncryptor;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 
-namespace ArtisanCode.KeyGen
+namespace ArtisanCode.Log4NetMessageEncryptor.KeyGen
 {
     class Program
     {

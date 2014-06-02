@@ -15,4 +15,9 @@
     <releaseNotes>Initial version</releaseNotes>
     <tags>.NET Log4Net logging Encryption</tags>
   </metadata>
+  <files>
+    <file src="\bin\Release\Tools\KeyGen\*.dll" target="tools\KeyGen" />
+    <file src="\bin\Release\Tools\KeyGen\*.exe" target="tools\KeyGen" />
+    <file src="\bin\Release\Tools\KeyGen\*.config" target="tools\KeyGen" />
+  </files>
 </package>
