@@ -1,5 +1,5 @@
 ﻿using ArtisanCode.Log4NetMessageEncryptor;
-using ArtisanCode.Log4NetMessageEncryptor.Encryption;
+using ArtisanCode.SimpleAesEncryption;
 
 using FizzWare.NBuilder;
 using log4net.Core;
@@ -62,7 +62,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             var messageEncryption = new RijndaelMessageEncryptor();
             var logEventFactory = new LoggingEventFactory();
 
-            var localTarget = new MessageEncryptingForwardingAppender(messageEncryption,logEventFactory);
+            var localTarget = new MessageEncryptingForwardingAppender(messageEncryption, logEventFactory);
 
             Assert.AreSame(messageEncryption, localTarget.MessageEncryption);
             Assert.AreSame(logEventFactory, localTarget.LogEventFactory);

@@ -1,4 +1,4 @@
-﻿using ArtisanCode.Log4NetMessageEncryptor.Encryption;
+﻿using ArtisanCode.SimpleAesEncryption;
 
 using log4net.Appender;
 using log4net.Core;
