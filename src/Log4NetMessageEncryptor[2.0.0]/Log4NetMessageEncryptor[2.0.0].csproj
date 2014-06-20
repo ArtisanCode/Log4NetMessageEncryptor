@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B0FA892-5E31-4EB0-A81E-499542705B04}</ProjectGuid>
+    <ProjectGuid>{FEF51FE8-863A-4B3B-94AC-8658F76F0221}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ArtisanCode.Log4NetMessageEncryptor</RootNamespace>
@@ -25,17 +25,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release.1.2.10\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="ArtisanCode.SimpleAesEncryption">
+      <HintPath>..\..\packages\Simple.AES.1.1.9.0\lib\net40\ArtisanCode.SimpleAesEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -47,20 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EncryptionKeyConfigurationElement.cs" />
-    <Compile Include="Encryption\IMessageDecryptor.cs" />
-    <Compile Include="Encryption\IMessageEncryptor.cs" />
-    <Compile Include="Encryption\RijndaelMessageDecryptor.cs" />
-    <Compile Include="Encryption\RijndaelMessageEncryptor.cs" />
-    <Compile Include="Encryption\RijndaelMessageHandler.cs" />
-    <Compile Include="ILoggingEventFactory.cs" />
-    <Compile Include="Log4NetMessageEncryptorConfiguration.cs" />
-    <Compile Include="LoggingEventFactory.cs" />
-    <Compile Include="MessageEncryptingForwardingAppender.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Log4NetMessageEncryptor\ILoggingEventFactory.cs" />
+    <Compile Include="..\Log4NetMessageEncryptor\Log4NetMessageEncryptorConfiguration.cs" />
+    <Compile Include="..\Log4NetMessageEncryptor\LoggingEventFactory.cs" />
+    <Compile Include="..\Log4NetMessageEncryptor\MessageEncryptingForwardingAppender.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Log4NetMessageEncryptor.1.2.10.nuspec" />
+    <None Include="Log4NetMessageEncryptor[2.0.0].nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
