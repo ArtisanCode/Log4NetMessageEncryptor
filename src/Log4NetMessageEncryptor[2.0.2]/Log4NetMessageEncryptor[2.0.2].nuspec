@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Log4Net.MessageEncryptor_1.2.10</id>
+    <id>Log4Net.MessageEncryptor_2.0.2</id>
     <version>$version$</version>
-    <title>Log4Net [1.2.10] Message Encryption</title>
+    <title>Log4Net [2.0.2] Message Encryption</title>
     <authors>Tom Kuhn</authors>
     <owners>Artisan Code</owners>
     <iconUrl>https://avatars3.githubusercontent.com/u/7647107</iconUrl>
@@ -11,7 +11,7 @@
     <projectUrl>https://github.com/ArtisanCode/Log4NetMessageEncryptor</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>The Log4Net MessageEncryptor tool lets you encrypt log messages whilst keeping the log meta data (timestamp, level etc.) in plaintext.</summary>
-    <description>NB: For use with log4net version 1.2.10 only. 
+    <description>NB: For use with log4net version 2.0.2 only. 
     The Log4Net MessageEncryptor tool lets you encrypt log messages whilst keeping the log meta data (timestamp, level etc.) in plaintext. The encryption used is a standard symmetric key encryption algorithm (Rijndael) to securely lock away any sensitive information present within the log messages.</description>
     <releaseNotes>Initial version</releaseNotes>
     <tags>.NET Log4Net logging Encryption</tags>

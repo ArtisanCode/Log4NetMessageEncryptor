@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Log4Net.MessageEncryptor.2.0.0</id>
+    <id>Log4Net.MessageEncryptor_2.0.0</id>
     <version>$version$</version>
     <title>Log4Net [2.0.0] Message Encryption</title>
     <authors>Tom Kuhn</authors>

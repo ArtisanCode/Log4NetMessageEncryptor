@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Log4Net Message Encryptor")]
+[assembly: AssemblyTitle("Log4Net [2.0.3] Message Encryptor")]
 [assembly: AssemblyDescription("Encrypts Log4Net log messages using a symmetric key algorithm whilst leaving the rest of the log message (timestamp, level etc.) in plaintext.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ArtisanCode")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b796a225-ab8b-4dee-8201-1fa61aa75212")]
+[assembly: Guid("4bc59a63-cc5e-4601-840d-b6717086691f")]
 
 // Version information for an assembly consists of the following four values:
 //
