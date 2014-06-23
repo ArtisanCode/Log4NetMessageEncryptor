@@ -15,9 +15,20 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// <remarks>
         /// Default constructor. This instantiates the class with all default dependencies
         /// </remarks>
-        public MessageEncryptingForwardingAppender()
+        public MessageEncryptingForwardingAppender():this("Log4NetMessageEncryption")
         {
-            MessageEncryption = new RijndaelMessageEncryptor();
+            // Nothing extra to do
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageEncryptingForwardingAppender"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Default constructor. This instantiates the class with all default dependencies
+        /// </remarks>
+        public MessageEncryptingForwardingAppender(string configurationSection)
+        {
+            MessageEncryption = new RijndaelMessageEncryptor("Log4NetMessageEncryption");
             LogEventFactory = new LoggingEventFactory();
         }
 
