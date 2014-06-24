@@ -60,7 +60,7 @@ Convert.ToBase64String(new byte[32] {
 
 This is the part where we tell Log4Net about the encryption and plumb it into the log pipeline. This is done with the following configuration:
 ```xml
-<appender name="MessageEncryptingAppender" type="ArtisanCode.Log4NetMessageEncryptor.MessageEncryptingForwardingAppender">
+<appender name="MessageEncryptingAppender" type="ArtisanCode.Log4NetMessageEncryptor.MessageEncryptingForwardingAppender, ArtisanCode.Log4NetMessageEncryptor">
   <!-- Add other appenders here and the log messages will be sent to every listed appender with the encrypted messages -->
   <appender-ref ref="RollingFileAppender"/> <!-- Link to another Log4Net appender -->
   <appender-ref ref="ColoredConsoleAppender"/> <!-- Link to another Log4Net appender -->
