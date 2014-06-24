@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Log4Net Message Encryptor")]
-[assembly: AssemblyDescription("Encrypts Log4Net log messages using a symmetric key algorithm whilst leaving the rest of the log message (timestamp, level etc.) in plaintext.")]
+[assembly: AssemblyTitle("AcceptanceTests.Log4NetMessageEncryptor")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ArtisanCode")]
-[assembly: AssemblyProduct("Log4Net.MessageEncryptor")]
-[assembly: AssemblyCopyright("ArtisanCode")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("AcceptanceTests.Log4NetMessageEncryptor")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b796a225-ab8b-4dee-8201-1fa61aa75212")]
+[assembly: Guid("e3696d1a-6e65-4337-b25d-e5183c649f10")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -30,6 +31,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
