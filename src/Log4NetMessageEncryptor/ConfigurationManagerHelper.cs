@@ -12,5 +12,10 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         {
             return ConfigurationManager.OpenExeConfiguration(userLevel);
         }
+
+        public object GetSection(string sectionName)
+        {
+            return ConfigurationManager.GetSection(sectionName);
+        }
     }
 }

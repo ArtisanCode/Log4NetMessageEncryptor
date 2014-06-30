@@ -75,6 +75,7 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
             config.RootSectionGroup.Sections.Clear(); 
 
             var configHelperMock = mocks.Create<IConfigurationManagerHelper>();
+            configHelperMock.Setup(x => x.GetSection(It.IsAny<string>())).Returns(null);
             configHelperMock.Setup(x => x.OpenExeConfiguration(It.IsAny<ConfigurationUserLevel>())).Returns(config);
 
             _target.ConfigHelper = configHelperMock.Object;

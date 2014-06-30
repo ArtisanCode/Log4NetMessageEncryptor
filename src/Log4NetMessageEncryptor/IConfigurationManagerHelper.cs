@@ -9,5 +9,6 @@ namespace ArtisanCode.Log4NetMessageEncryptor
     public interface IConfigurationManagerHelper
     {
         Configuration OpenExeConfiguration(ConfigurationUserLevel userLevel);
+        object GetSection(string sectionName);
     }
 }

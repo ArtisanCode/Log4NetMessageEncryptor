@@ -15,6 +15,11 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         protected IConfigurationManagerHelper _configHelper = new ConfigurationManagerHelper();
 
         /// <summary>
+        /// Sets the default config section name for the encryption settings
+        /// </summary>
+        protected const string DEFAULT_CONFIG_SECTION_NAME = "Log4NetMessageEncryption";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MessageEncryptingForwardingAppender"/> class.
         /// </summary>
         /// <remarks>
@@ -142,6 +147,15 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         /// <returns>The configuration section name found </returns>
         public virtual string LocateEncryptionConfigurationSection()
         {
+            // look to see if the default section is present
+            var defaultSection = ConfigHelper.GetSection(DEFAULT_CONFIG_SECTION_NAME) as Log4NetMessageEncryptorConfiguration;
+            if (defaultSection != null)
+            {
+                // There is a valid configuration object using the default section name, use this config entry.
+                return DEFAULT_CONFIG_SECTION_NAME;
+            }
+
+            // The configuration cannot be found using the default section name, see if is named something else
             const string targetConfigType = "ArtisanCode.Log4NetMessageEncryptor.Log4NetMessageEncryptorConfiguration";
 
             // Open the configuration file to examine the <configSections> info
