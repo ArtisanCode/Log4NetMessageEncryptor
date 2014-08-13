@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationManagerHelper.cs" />
+    <Compile Include="IConfigurationManagerHelper.cs" />
     <Compile Include="ILoggingEventFactory.cs" />
     <Compile Include="Log4NetMessageEncryptorConfiguration.cs" />
     <Compile Include="LoggingEventFactory.cs" />

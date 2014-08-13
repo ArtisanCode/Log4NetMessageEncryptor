@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace ArtisanCode.Test.Log4NetMessageEncryptor
 {
@@ -54,6 +55,32 @@ namespace ArtisanCode.Test.Log4NetMessageEncryptor
 
             Assert.IsNotNull(localTarget.LogEventFactory);
             Assert.IsNotNull(localTarget.MessageEncryption);
+        }
+
+        [TestMethod]
+        public void LocateEncryptionConfigurationSection_DefaultConfigFile_FirstEncryptionConfigDetailsFoundInFile()
+        {
+            var result = _target.LocateEncryptionConfigurationSection();
+            
+            // Check that the first ArtisanCode.Log4NetMessageEncryptor.Log4NetMessageEncryptorConfiguration 
+            // configuration entry was found and passed to the Encryptor in the constructor
+            Assert.AreEqual("Log4NetMessageEncryption", result);
+        }        
+
+        [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void LocateEncryptionConfigurationSection_NoConfigSectionSpecified_ConfigurationErrrorsExceptionThrown()
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.RootSectionGroup.Sections.Clear(); 
+
+            var configHelperMock = mocks.Create<IConfigurationManagerHelper>();
+            configHelperMock.Setup(x => x.GetSection(It.IsAny<string>())).Returns(null);
+            configHelperMock.Setup(x => x.OpenExeConfiguration(It.IsAny<ConfigurationUserLevel>())).Returns(config);
+
+            _target.ConfigHelper = configHelperMock.Object;
+
+            var result = _target.LocateEncryptionConfigurationSection();
         }
 
         [TestMethod]

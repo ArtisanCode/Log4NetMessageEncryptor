@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Log4NetMessageEncryptor\ConfigurationManagerHelper.cs">
+      <Link>ConfigurationManagerHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Log4NetMessageEncryptor\IConfigurationManagerHelper.cs">
+      <Link>IConfigurationManagerHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Log4NetMessageEncryptor\ILoggingEventFactory.cs" />
     <Compile Include="..\Log4NetMessageEncryptor\Log4NetMessageEncryptorConfiguration.cs" />
     <Compile Include="..\Log4NetMessageEncryptor\LoggingEventFactory.cs" />
