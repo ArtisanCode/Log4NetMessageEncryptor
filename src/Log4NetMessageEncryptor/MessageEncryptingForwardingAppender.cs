@@ -104,7 +104,7 @@ namespace ArtisanCode.Log4NetMessageEncryptor
         {
             var encryptedEvents = loggingEvents.Select(x => GenerateEncryptedLogEvent(x)).ToArray();
 
-            base.Append(loggingEvents);
+            base.Append(encryptedEvents);
         }
 
         /// <summary>
