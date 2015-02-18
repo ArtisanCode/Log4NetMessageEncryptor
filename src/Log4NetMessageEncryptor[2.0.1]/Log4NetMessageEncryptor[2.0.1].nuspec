@@ -16,4 +16,8 @@
     <releaseNotes>Initial version</releaseNotes>
     <tags>.NET Log4Net logging Encryption</tags>
   </metadata>
+  <files>
+    <file src="..\tools\KeyGen\bin\Release\*.*" target="tools\KeyGen\" exclude="*.pdb;*vshost*" />
+    <file src="..\tools\LogDecrypt\bin\Release\*.*" target="tools\LogDecrypt\" exclude="*.pdb;*vshost*" />
+  </files>
 </package>
