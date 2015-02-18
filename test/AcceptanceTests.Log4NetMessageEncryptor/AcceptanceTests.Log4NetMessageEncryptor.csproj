@@ -75,7 +75,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Log4NetMessageEncryptor\Log4NetMessageEncryptor.csproj">
+    <ProjectReference Include="..\..\src\Log4NetMessageEncryptor\Log4NetMessageEncryptor.csproj">
       <Project>{fc66dd47-93d4-4191-ac8f-454ba3616fb6}</Project>
       <Name>Log4NetMessageEncryptor</Name>
     </ProjectReference>

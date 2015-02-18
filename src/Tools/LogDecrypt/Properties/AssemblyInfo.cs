@@ -5,14 +5,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LogManager")]
+[assembly: AssemblyTitle("LogDecrypt")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LogManager")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("ArtisanCode")]
+[assembly: AssemblyProduct("Log4Net.MessageEncryptor")]
+[assembly: AssemblyCopyright("ArtisanCode")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -20,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("faad4913-11a3-41ea-b8e7-549c101ca23a")]
+[assembly: Guid("3450bf71-4dba-4310-9dd0-5c8bf2bddd75")]
 
 // Version information for an assembly consists of the following four values:
 //
