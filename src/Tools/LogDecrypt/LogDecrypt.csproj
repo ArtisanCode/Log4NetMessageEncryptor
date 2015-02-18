@@ -34,9 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ArtisanCode.SimpleAesEncryption, Version=1.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ArtisanCode.SimpleAesEncryption, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Simple.AES.1.1.9.0\lib\net40\ArtisanCode.SimpleAesEncryption.dll</HintPath>
+      <HintPath>..\..\..\packages\Simple.AES.2.0.2.0\lib\net40\ArtisanCode.SimpleAesEncryption.dll</HintPath>
     </Reference>
     <Reference Include="CommandLine">
       <HintPath>..\..\..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>

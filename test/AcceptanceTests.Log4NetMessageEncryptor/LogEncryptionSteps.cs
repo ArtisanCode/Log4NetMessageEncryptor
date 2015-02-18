@@ -40,7 +40,7 @@ namespace AcceptanceTests.Log4NetMessageEncryptor
             var events = GetLoggedEvents();
 
             Assert.IsFalse(events[0].RenderedMessage.Contains("Test Message"));
-            Assert.IsTrue(events[0].RenderedMessage.Contains(">>"));
+            Assert.IsTrue(events[0].RenderedMessage.Contains("??"));
         }
 
         public LoggingEvent[] GetLoggedEvents()

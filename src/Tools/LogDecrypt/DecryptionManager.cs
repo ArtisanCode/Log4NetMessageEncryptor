@@ -47,9 +47,9 @@ namespace LogDecrypt
                     if (line.Contains(RijndaelMessageHandler.CYPHER_TEXT_IV_SEPERATOR))
                     {
                         // Split the line by spaces, tabs
-                        var tokens = line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
-                        var decryptionPairs = tokens.Where(x => x.Contains(RijndaelMessageHandler.CYPHER_TEXT_IV_SEPERATOR))
-                            .Select(x => new Tuple<string, string>(x, decryptor.Decrypt(x)));
+                        var tokens = line.Split(new[] {" ", "\t", ">", "<" }, StringSplitOptions.RemoveEmptyEntries);
+                        var decryptionTargets = tokens.Where(x => x.Contains(RijndaelMessageHandler.CYPHER_TEXT_IV_SEPERATOR));
+                        var decryptionPairs = decryptionTargets.Select(x => new Tuple<string, string>(x, decryptor.Decrypt(x)));
 
                         // Replace any encrypted strings in the line and then output it to the file
                         var output = decryptionPairs.Aggregate(line, (current, pair) => current.Replace(pair.Item1, pair.Item2));

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Test.Log4NetMessageEncryptor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Artisan Code")]
 [assembly: AssemblyProduct("Test.Log4NetMessageEncryptor")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2015 Artisan Code")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

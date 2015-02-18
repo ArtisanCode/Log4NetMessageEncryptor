@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("KeyGen")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Generate a key for use with the Log4Net Message Encryptor library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Artisan Code")]
 [assembly: AssemblyProduct("KeyGen")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2015 Artisan Code")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
